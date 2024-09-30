@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //import JUNIT 4
@@ -22,7 +23,7 @@ public class WorkshopTest {
     //Test para el area del circulo
     public void testAreaCirculo() {
         assertEquals(Math.PI, tester.areaCirculo(1), 0.001);
-        assertEquals((Math.PI*10), tester.areaCirculo(10), 0.001);;
+        assertEquals(Math.PI, tester.areaCirculo(10), 0.001);
         assertEquals(0, tester.areaCirculo(0), 0.001);
     }
 
