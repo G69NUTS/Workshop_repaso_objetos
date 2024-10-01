@@ -230,7 +230,7 @@ public class Workshop {
         // Método que cuenta el número de palabras en una cadena
         public int contarPalabras (String cadena){
 
-        
+
             String[] palabras = cadena.trim().split("\\s+");
 
             return palabras.length > 0 && !palabras[0].isEmpty() ? palabras.length : 0;
