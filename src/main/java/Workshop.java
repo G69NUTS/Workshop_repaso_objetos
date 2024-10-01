@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 public class Workshop {
     public static void main(String[] args) {
@@ -123,15 +126,33 @@ public class Workshop {
 
         // Método que invierte un arreglo
         public int[] invertirArreglo ( int[] arreglo){
-
-
-            // TODO: Implementar el método para invertir un arreglo.
-            // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser [5, 4, 3, 2, 1].
-            return new int[0];
+            int [] arregloInvertido = new int[arreglo.length];
+            for (int i = 0; i < arreglo.length; i++) {
+                arregloInvertido[i] = arreglo[arreglo.length - 1 - i];
+            }
+            return arregloInvertido;
         }
 
         // Método que ordena un arreglo en orden ascendente
         public int[] ordenarArreglo ( int[] arreglo){
+
+            int n = arreglo.length;
+            boolean intercambio;
+
+            // Recorrer el arreglo
+            for (int i = 0; i < n - 1; i++) {
+                intercambio = false;  // Inicializar la bandera de intercambio
+                // Comparar elementos adyacentes
+                for (int j = 0; j < n - 1 - i; j++) {
+                    if (arreglo[j] > arreglo[j + 1]) {
+                        // Intercambiar los elementos si están en el orden incorrecto
+                        int Sol = arreglo[j];
+                        arreglo[j] = arreglo[j + 1];
+                        arreglo[j + 1] = Sol;
+                        intercambio = true;  // Marcar que se ha realizado un intercambio
+                    }
+                }
+            }
             // TODO: Implementar el método para ordenar un arreglo en orden ascendente.
             // Ejemplo: Si arreglo = [5, 4, 3, 2, 1], el resultado debería ser [1, 2, 3, 4, 5].
             return new int[0];
@@ -139,79 +160,105 @@ public class Workshop {
 
         // Método que elimina los duplicados de un arreglo
         public int[] eliminarDuplicados ( int[] arreglo){
+
+           return new int[0];
             // TODO: Implementar el método para eliminar los duplicados de un arreglo.
             // Ejemplo: Si arreglo = [1, 2, 2, 3, 4, 4, 5], el resultado debería ser [1, 2, 3, 4, 5].
-            return new int[0];
         }
 
         // Método que combina dos arreglos en uno solo
         public int[] combinarArreglos ( int[] arreglo1, int[] arreglo2){
+
+            int[] vectorResultado = new int[10]; // Crear un vector para almacenar el resultado
+            for (int i = 0; i < 10; i++) {
+                vectorResultado[i] = arreglo1[i] + arreglo2[i]; // Sumar elementos correspondientes
+            }
+            return vectorResultado;
             // TODO: Implementar el método para combinar dos arreglos en uno solo.
             // Ejemplo: Si arreglo1 = [1, 2, 3, 4, 5] y arreglo2 = [6, 7, 8], el resultado debería ser [1, 2, 3, 4, 5, 6, 7, 8].
-            return new int[0];
         }
 
         // Método que rota un arreglo n posiciones
         public int[] rotarArreglo ( int[] arreglo, int posiciones){
+
+            int longitud = arreglo.length;
+
+            int[] nuevoArreglo = new int[longitud];
+
+            for (int i = 0; i < longitud; i++) {
+                // Calcular la nueva posición
+                int nuevaPosicion = (i + posiciones) % longitud;
+                nuevoArreglo[nuevaPosicion] = arreglo[i];
+            }
+
+            return nuevoArreglo;  // Devolver el nuevo arreglo desplazado
             // TODO: Implementar el método para rotar un arreglo n posiciones.
             // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y posiciones = 2, el resultado debería ser [3, 4, 5, 1, 2].
-            return new int[0];
+
         }
 
         // Método que cuenta los caracteres en una cadena
         public int contarCaracteres (String cadena){
-            // TODO: Implementar el método para contar el número de caracteres en una cadena.
-            // Ejemplo: Si cadena = "Hello", el resultado debería ser 5.
-            return 0;
+            return cadena.length();
         }
 
         // Método que invierte una cadena
         public String invertirCadena (String cadena){
-            // TODO: Implementar el método para invertir una cadena.
-            // Ejemplo: Si cadena = "Hello", el resultado debería ser "olleH".
-            return "";
+
+            StringBuilder cadenaInvertida = new StringBuilder();
+
+            for (int i = cadena.length() - 1; i >= 0; i--) {
+                cadenaInvertida.append(cadena.charAt(i));
+            }
+            return cadenaInvertida.toString();
+
         }
 
         // Método que verifica si una cadena es un palíndromo
         public boolean esPalindromo (String cadena){
-            // TODO: Implementar el método para verificar si una cadena es un palíndromo.
-            // Ejemplo: Si cadena = "madam", el resultado debería ser true.
-            return false;
+
+            String cadenaLimpiada = cadena.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+            StringBuilder cadenaInvertida = new StringBuilder();
+
+            for (int i = cadenaLimpiada.length() - 1; i >= 0; i--) {
+                cadenaInvertida.append(cadenaLimpiada.charAt(i));
+            }
+
+            return cadenaLimpiada.contentEquals(cadenaInvertida);
         }
 
         // Método que cuenta el número de palabras en una cadena
         public int contarPalabras (String cadena){
-            // TODO: Implementar el método para contar el número de palabras en una cadena.
-            // Ejemplo: Si cadena = "Este es un test", el resultado debería ser 4.
-            return 0;
+
+        
+            String[] palabras = cadena.trim().split("\\s+");
+
+            return palabras.length > 0 && !palabras[0].isEmpty() ? palabras.length : 0;
+
         }
 
         // Método que convierte una cadena a mayúsculas
+
+
         public String convertirAMayusculas (String cadena){
             // TODO: Implementar el método para convertir una cadena a mayúsculas.
             // Ejemplo: Si cadena = "hello", el resultado debería ser "HELLO".
-            return "";
+            return cadena.toUpperCase();
         }
 
         // Método que convierte una cadena a minúsculas
         public String convertirAMinusculas (String cadena){
-            // TODO: Implementar el método para convertir una cadena a minúsculas.
-            // Ejemplo: Si cadena = "HELLO", el resultado debería ser "hello".
-            return "";
+            return cadena.toLowerCase();
         }
 
         // Método que reemplaza una subcadena en una cadena por otra subcadena
         public String reemplazarSubcadena (String cadena, String antiguaSubcadena, String nuevaSubcadena){
-            // TODO: Implementar el método para reemplazar una subcadena en una cadena por otra subcadena.
-            // Ejemplo: Si cadena = "Hello Java", antiguaSubcadena = "Java", y nuevaSubcadena = "world", el resultado debería ser "Hello world".
-            return "";
+            return cadena.replace(antiguaSubcadena,nuevaSubcadena);
         }
 
         // Método que busca una subcadena en una cadena y retorna su índice
         public int buscarSubcadena (String cadena, String subcadena){
-            // TODO: Implementar el método para buscar una subcadena en una cadena y retornar su índice.
-            // Ejemplo: Si cadena = "Hello world" y subcadena = "world", el resultado debería ser 6.
-            return -1;
+            return cadena.indexOf(subcadena);
         }
 
         // Método que valida un correo electrónico

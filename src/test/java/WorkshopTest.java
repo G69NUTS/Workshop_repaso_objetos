@@ -218,11 +218,11 @@ public class WorkshopTest {
     @Test
     public void testContarCaracteres() {
         // Test 1: Contar caracteres en cadena
-        assertEquals(13, tester.contarCaracteres("Hola mundo"));
+        assertEquals(10, tester.contarCaracteres("Hola mundo"));
         // Test 2: Contar caracteres en cadena vacía
         assertEquals(0, tester.contarCaracteres(""));
         // Test 3: Contar caracteres en cadena con espacios
-        assertEquals(14, tester.contarCaracteres("Hola   mundo"));
+        assertEquals(12, tester.contarCaracteres("Hola   mundo"));
     }
 
     // Test para el método invertirCadena
@@ -233,7 +233,7 @@ public class WorkshopTest {
         // Test 2: Invertir cadena vacía
         assertEquals("", tester.invertirCadena(""));
         // Test 3: Invertir cadena con caracteres especiales
-        assertEquals("!@#321", tester.invertirCadena("123@#!"));
+        assertEquals("!#@321", tester.invertirCadena("123@#!"));
     }
 
     // Test para el método esPalindromo
@@ -256,7 +256,7 @@ public class WorkshopTest {
         // Test 2: Contar palabras en cadena vacía
         assertEquals(0, tester.contarPalabras(""));
         // Test 3: Contar palabras con múltiples espacios
-        assertEquals(4, tester.contarPalabras("Hola   mundo  hoy"));
+        assertEquals(4, tester.contarPalabras("Hola   mundo  hoy  feliz "));
     }
 
     // Test para el método convertirAMayusculas
