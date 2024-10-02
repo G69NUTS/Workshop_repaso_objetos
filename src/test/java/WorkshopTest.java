@@ -331,11 +331,11 @@ public class WorkshopTest {
     @Test
     public void testConvertirAHexadecimal() {
         // Test 1: Convertir número a hexadecimal
-        assertEquals("FF", tester.convertirAHexadecimal(255));
+        assertEquals("ff", tester.convertirAHexadecimal(255));
         // Test 2: Convertir número cero a hexadecimal
         assertEquals("0", tester.convertirAHexadecimal(0));
         // Test 3: Convertir número negativo (debe manejarse correctamente)
-        assertEquals("-FF", tester.convertirAHexadecimal(-255));
+        assertEquals("-ff", tester.convertirAHexadecimal(-255));
     }
 
     // Test para el método jugarPiedraPapelTijeraLagartoSpock

@@ -1,7 +1,7 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.regex.Pattern;
+
+import static java.lang.System.*;
 
 public class Workshop {
     public static void main(String[] args) {
@@ -108,8 +108,6 @@ public class Workshop {
                 }
             }
 
-            // TODO: Implementar el método para encontrar el elemento menor en un arreglo.
-            // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser 1.
             return menor;
         }
 
@@ -137,31 +135,38 @@ public class Workshop {
         public int[] ordenarArreglo ( int[] arreglo){
 
             int n = arreglo.length;
-            boolean intercambio;
 
-            // Recorrer el arreglo
-            for (int i = 0; i < n - 1; i++) {
-                intercambio = false;  // Inicializar la bandera de intercambio
-                // Comparar elementos adyacentes
-                for (int j = 0; j < n - 1 - i; j++) {
-                    if (arreglo[j] > arreglo[j + 1]) {
-                        // Intercambiar los elementos si están en el orden incorrecto
-                        int Sol = arreglo[j];
-                        arreglo[j] = arreglo[j + 1];
-                        arreglo[j + 1] = Sol;
-                        intercambio = true;  // Marcar que se ha realizado un intercambio
+            for (int j = 0; j < n - 1; j++) {
+                for (int i = 0; i < n - 1 - j; i++) {
+                    if (arreglo[i] > arreglo[i + 1]) {
+                        int Sol = arreglo[i];
+                        arreglo[i] = arreglo[i + 1];
+                        arreglo[i + 1] = Sol;
                     }
                 }
             }
-            // TODO: Implementar el método para ordenar un arreglo en orden ascendente.
-            // Ejemplo: Si arreglo = [5, 4, 3, 2, 1], el resultado debería ser [1, 2, 3, 4, 5].
-            return new int[0];
+            return arreglo;
         }
 
         // Método que elimina los duplicados de un arreglo
         public int[] eliminarDuplicados ( int[] arreglo){
 
-           return new int[0];
+            Set<Integer> conjunto = new LinkedHashSet<>();
+
+            // Añadimos cada elemento del arreglo al conjunto (los duplicados se eliminan automáticamente)
+            for (int num : arreglo) {
+                conjunto.add(num);
+            }
+
+            // Convertimos el conjunto nuevamente a un arreglo
+            int[] arregloSinDuplicados = new int[conjunto.size()];
+            int i = 0;
+            for (int num : conjunto) {
+                arregloSinDuplicados[i++] = num;
+            }
+
+            return arregloSinDuplicados;
+
             // TODO: Implementar el método para eliminar los duplicados de un arreglo.
             // Ejemplo: Si arreglo = [1, 2, 2, 3, 4, 4, 5], el resultado debería ser [1, 2, 3, 4, 5].
         }
@@ -169,31 +174,35 @@ public class Workshop {
         // Método que combina dos arreglos en uno solo
         public int[] combinarArreglos ( int[] arreglo1, int[] arreglo2){
 
-            int[] vectorResultado = new int[10]; // Crear un vector para almacenar el resultado
-            for (int i = 0; i < 10; i++) {
-                vectorResultado[i] = arreglo1[i] + arreglo2[i]; // Sumar elementos correspondientes
-            }
-            return vectorResultado;
-            // TODO: Implementar el método para combinar dos arreglos en uno solo.
-            // Ejemplo: Si arreglo1 = [1, 2, 3, 4, 5] y arreglo2 = [6, 7, 8], el resultado debería ser [1, 2, 3, 4, 5, 6, 7, 8].
+            int[] arregloCombinado = new int[arreglo1.length + arreglo2.length];
+
+            // Copiamos los elementos del primer arreglo en el nuevo arreglo
+            arraycopy(arreglo1, 0, arregloCombinado, 0, arreglo1.length);
+
+            // Copiamos los elementos del segundo arreglo en el nuevo arreglo, después del primero
+            arraycopy(arreglo2, 0, arregloCombinado, arreglo1.length + 0, arreglo2.length);
+
+            return arregloCombinado;
+
         }
 
         // Método que rota un arreglo n posiciones
         public int[] rotarArreglo ( int[] arreglo, int posiciones){
 
-            int longitud = arreglo.length;
+            int n = arreglo.length;
 
-            int[] nuevoArreglo = new int[longitud];
+            // Asegúrate de que las posiciones no sean mayores que el tamaño del arreglo
+            posiciones = posiciones % n; // Reduce las posiciones si son mayores que n
 
-            for (int i = 0; i < longitud; i++) {
-                // Calcular la nueva posición
-                int nuevaPosicion = (i + posiciones) % longitud;
-                nuevoArreglo[nuevaPosicion] = arreglo[i];
+            // Crear un nuevo arreglo para almacenar el resultado
+            int[] arregloRotado = new int[n];
+
+            // Copiamos los elementos del arreglo original en la nueva posición
+            for (int i = 0; i < n; i++) {
+                arregloRotado[(i + posiciones) % n] = arreglo[i];
             }
 
-            return nuevoArreglo;  // Devolver el nuevo arreglo desplazado
-            // TODO: Implementar el método para rotar un arreglo n posiciones.
-            // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y posiciones = 2, el resultado debería ser [3, 4, 5, 1, 2].
+            return arregloRotado;
 
         }
 
@@ -230,7 +239,6 @@ public class Workshop {
         // Método que cuenta el número de palabras en una cadena
         public int contarPalabras (String cadena){
 
-
             String[] palabras = cadena.trim().split("\\s+");
 
             return palabras.length > 0 && !palabras[0].isEmpty() ? palabras.length : 0;
@@ -238,8 +246,6 @@ public class Workshop {
         }
 
         // Método que convierte una cadena a mayúsculas
-
-
         public String convertirAMayusculas (String cadena){
             // TODO: Implementar el método para convertir una cadena a mayúsculas.
             // Ejemplo: Si cadena = "hello", el resultado debería ser "HELLO".
@@ -263,35 +269,109 @@ public class Workshop {
 
         // Método que valida un correo electrónico
         public boolean validarCorreoElectronico (String correo){
+
+            String regex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,}$";
+
+            // Utiliza Pattern para validar el correo según la expresión regular
+            return Pattern.matches(regex, correo);
+
+
             // TODO: Implementar el método para validar un correo electrónico.
             // Ejemplo: Si correo = "test@example.com", el resultado debería ser true.
-            return false;
         }
 
         // Método que calcula el promedio de una lista de números
 
         public double promedioLista (List < Integer > lista) {
-            // TODO: Implementar el método para calcular el promedio de una lista de números.
-            // Ejemplo: Si lista = [1, 2, 3, 4, 5], el resultado debería ser 3.0.
-            return 0.0;
+            if (lista.isEmpty()) {
+                return 0;
+            }
+            int suma = 0;
+            for (int numero : lista) {
+                suma += numero;
+            }
+            return (double) suma / lista.size();
+
         }
 
         // Método que convierte un número en su representación binaria
         public String convertirABinario ( int numero){
-            // TODO: Implementar el método para convertir un número en su representación binaria.
-            // Ejemplo: Si numero = 10, el resultado debería ser "1010".
-            return "";
+            if (numero < 0) {
+                return "-" + Integer.toBinaryString(Math.abs(numero));
+            } else {
+                return  Integer.toBinaryString(numero);
+            }
+
         }
 
         // Método que convierte un número en su representación hexadecimal
         public String convertirAHexadecimal ( int numero){
-            // TODO: Implementar el método para convertir un número en su representación hexadecimal.
-            // Ejemplo: Si numero = 255, el resultado debería ser "FF".
-            return "";
+            if(numero<0){
+                return "-" + Integer.toHexString(Math.abs(numero));
+            }else{
+            return Integer.toHexString(numero);
+            }
         }
 
         // Método para el juego de piedra, papel, tijera, lagarto, Spock
         public String jugarPiedraPapelTijeraLagartoSpock (String eleccionUsuario){
+
+            String[] opciones = {"Piedra", "Papel", "Tijera", "Lagarto", "Spock"};
+            String eleccionComputadora = obtenerEleccionComputadora(opciones);
+
+            // Retorna el resultado del juego dependiendo de las elecciones
+            if (eleccionUsuario.equalsIgnoreCase(eleccionComputadora)) {
+                return "Empate, ambos eligieron " + eleccionUsuario;
+            }
+
+            // Verifica si el usuario ganó
+            if (ganoUsuario(eleccionUsuario, eleccionComputadora)) {
+                return "Ganaste, " + eleccionUsuario + " vence a " + eleccionComputadora;
+            } else {
+                return "Perdiste, " + eleccionComputadora + " vence a " + eleccionUsuario;
+            }
+
+            private static String obtenerEleccionComputadora(String[] opciones) {
+                Random random = new Random();
+                int indice = random.nextInt(opciones.length);
+                return opciones[indice];
+            }
+
+            // Método para verificar si el usuario gana según las reglas del juego
+            private static boolean ganoUsuario(String usuario, String computadora) {
+                switch (usuario.toLowerCase()) {
+                    case "piedra":
+                        return computadora.equals("Tijera") || computadora.equals("Lagarto");
+                    case "papel":
+                        return computadora.equals("Piedra") || computadora.equals("Spock");
+                    case "tijera":
+                        return computadora.equals("Papel") || computadora.equals("Lagarto");
+                    case "lagarto":
+                        return computadora.equals("Spock") || computadora.equals("Papel");
+                    case "spock":
+                        return computadora.equals("Tijera") || computadora.equals("Piedra");
+                    default:
+                        return false; // Si la elección del usuario no es válida
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             // TODO: Implementar el método para el juego de Piedra, Papel, Tijera, Lagarto, Spock.
             // Las reglas del juego son:
             // - Piedra vence a Tijera y Lagarto
