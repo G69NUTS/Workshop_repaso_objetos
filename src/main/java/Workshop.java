@@ -26,6 +26,7 @@ public class Workshop {
         }
             return resultados;
         }
+
         // Método que calcula el factorial de un número entero
         public int factorial (int n){
             int Factorial = 1;
@@ -188,22 +189,17 @@ public class Workshop {
 
         // Método que rota un arreglo n posiciones
         public int[] rotarArreglo ( int[] arreglo, int posiciones){
-
-            int n = arreglo.length;
-
-            // Asegúrate de que las posiciones no sean mayores que el tamaño del arreglo
-            posiciones = posiciones % n; // Reduce las posiciones si son mayores que n
-
-            // Crear un nuevo arreglo para almacenar el resultado
-            int[] arregloRotado = new int[n];
-
-            // Copiamos los elementos del arreglo original en la nueva posición
-            for (int i = 0; i < n; i++) {
-                arregloRotado[(i + posiciones) % n] = arreglo[i];
+            int tamaño = arreglo.length;
+            if (posiciones < 0) {
+                posiciones = tamaño + (posiciones % tamaño);
+            } else {
+                posiciones = posiciones % tamaño;
             }
-
+            int[] arregloRotado = new int[tamaño];
+            for (int i = 0; i < tamaño; i++) {
+                arregloRotado[(i + posiciones) % tamaño] = arreglo[i];
+            }
             return arregloRotado;
-
         }
 
         // Método que cuenta los caracteres en una cadena
@@ -270,7 +266,7 @@ public class Workshop {
         // Método que valida un correo electrónico
         public boolean validarCorreoElectronico (String correo){
 
-            String regex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,}$";
+            String regex = "^[\\w-.]+@[\\w-]+\\.[a-z]{2,}$";
 
             // Utiliza Pattern para validar el correo según la expresión regular
             return Pattern.matches(regex, correo);
@@ -330,61 +326,25 @@ public class Workshop {
             } else {
                 return "Perdiste, " + eleccionComputadora + " vence a " + eleccionUsuario;
             }
-
-            private static String obtenerEleccionComputadora(String[] opciones) {
-                Random random = new Random();
-                int indice = random.nextInt(opciones.length);
-                return opciones[indice];
-            }
-
-            // Método para verificar si el usuario gana según las reglas del juego
-            private static boolean ganoUsuario(String usuario, String computadora) {
-                switch (usuario.toLowerCase()) {
-                    case "piedra":
-                        return computadora.equals("Tijera") || computadora.equals("Lagarto");
-                    case "papel":
-                        return computadora.equals("Piedra") || computadora.equals("Spock");
-                    case "tijera":
-                        return computadora.equals("Papel") || computadora.equals("Lagarto");
-                    case "lagarto":
-                        return computadora.equals("Spock") || computadora.equals("Papel");
-                    case "spock":
-                        return computadora.equals("Tijera") || computadora.equals("Piedra");
-                    default:
-                        return false; // Si la elección del usuario no es válida
-                }
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // TODO: Implementar el método para el juego de Piedra, Papel, Tijera, Lagarto, Spock.
-            // Las reglas del juego son:
-            // - Piedra vence a Tijera y Lagarto
-            // - Papel vence a Piedra y Spock
-            // - Tijera vence a Papel y Lagarto
-            // - Lagarto vence a Spock y Papel
-            // - Spock vence a Tijera y Piedra
-
-
-            // El método debe retornar un mensaje indicando el resultado del juego.
-            // Ejemplo: Si la eleccionUsuario es "Piedra", el resultado podría ser "Ganaste" o "Perdiste" dependiendo de la elección de la computadora.
-            return "";
         }
+
+    // Método para verificar si el usuario gana según las reglas del juego
+    private static boolean ganoUsuario(String usuario, String computadora) {
+        return switch (usuario.toLowerCase()) {
+            case "piedra" -> computadora.equals("Tijera") || computadora.equals("Lagarto");
+            case "papel" -> computadora.equals("Piedra") || computadora.equals("Spock");
+            case "tijera" -> computadora.equals("Papel") || computadora.equals("Lagarto");
+            case "lagarto" -> computadora.equals("Spock") || computadora.equals("Papel");
+            case "spock" -> computadora.equals("Tijera") || computadora.equals("Piedra");
+            default -> false; // Si la elección del usuario no es válida
+        };
+    }
+
+    private static String obtenerEleccionComputadora(String[] opciones) {
+        Random random = new Random();
+        int indice = random.nextInt(opciones.length);
+        return opciones[indice];
+    }
 
         public String pptls2 (String game[]){
             //Retornar player ganador o empate
